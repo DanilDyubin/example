@@ -1,0 +1,71 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: #f4f7fe;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.react-calendar-timeline .rct-dateHeader {
+  background-color: var(--color-white) !important; // поменять
+}
+
+/* .react-calendar-timeline .custom-sidebar-header {
+  background: var(--color-white);
+} */
+
+/* .react-calendar-timeline .rct-sidebar {
+  background: var(--color-white);
+} */
+
+.react-calendar-timeline .rct-outer {
+  background: var(--color-white);
+}
+
+.react-calendar-timeline .rct-sidebar .rct-sidebar-row {
+  padding: 0 !important;
+}

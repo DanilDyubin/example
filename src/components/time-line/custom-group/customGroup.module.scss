@@ -1,0 +1,29 @@
+.custom-group {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+
+  &__values {
+    display: flex;
+
+    &-plan {
+      width: 100px;
+      text-align: center;
+      color: var(--color-text);
+    }
+
+    &-fact {
+      width: 110px;
+      text-align: center;
+      color: var(--color-green);
+    }
+  }
+}
+
+.warning {
+  color: var(--color-warning);
+}

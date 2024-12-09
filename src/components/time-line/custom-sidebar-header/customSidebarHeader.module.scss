@@ -1,0 +1,22 @@
+.custom-sidebar-header {
+  display: flex;
+  background-color: var(--color-white);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #858585;
+
+  &__subtitles {
+    display: flex;
+
+    &-done {
+      width: 100px;
+      text-align: center;
+    }
+
+    &-deviation {
+      width: 110px;
+      text-align: center;
+    }
+  }
+}
