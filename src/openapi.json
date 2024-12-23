@@ -1,0 +1,297 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/upload_images": {
+      "post": {
+        "summary": "Upload Images",
+        "operationId": "upload_images_upload_images_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": { "$ref": "#/components/schemas/Body_upload_images_upload_images_post" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_images": {
+      "get": {
+        "summary": "Get Images",
+        "operationId": "get_images_get_images_get",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Uid" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successful Response", "content": { "image/png": {} } },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stage_detection/": {
+      "post": {
+        "summary": "Stage Detection Endpoint",
+        "operationId": "stage_detection_endpoint_stage_detection__post",
+        "parameters": [
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "schema": { "$ref": "#/components/schemas/ModelEnum", "default": "ksm-43-mid" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "array", "items": { "type": "string" }, "title": "Upload Id" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stage_detection_status/{task_id}": {
+      "get": {
+        "summary": "Get Collision Status",
+        "operationId": "get_collision_status_stage_detection_status__task_id__get",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Task Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/TaskStatus" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_predicted_images": {
+      "get": {
+        "summary": "Get Predicted Images",
+        "operationId": "get_predicted_images_get_predicted_images_get",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Uid" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successful Response", "content": { "image/png": {} } },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_upload_images_upload_images_post": {
+        "properties": {
+          "upl_img": {
+            "items": { "type": "string", "format": "binary" },
+            "type": "array",
+            "title": "Upl Img"
+          }
+        },
+        "type": "object",
+        "required": ["upl_img"],
+        "title": "Body_upload_images_upload_images_post"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ImageReport": {
+        "properties": {
+          "image": { "type": "string", "title": "Image" },
+          "predicted_image": { "type": "string", "title": "Predicted Image" },
+          "report": { "$ref": "#/components/schemas/Report" }
+        },
+        "type": "object",
+        "required": ["image", "predicted_image", "report"],
+        "title": "ImageReport"
+      },
+      "ModelEnum": {
+        "type": "string",
+        "enum": [
+          "ksm-32-best",
+          "ksm-33-mid",
+          "ksm-42-best",
+          "ksm-43-mid",
+          "ksm-62-best",
+          "ksm-63-mid"
+        ],
+        "title": "ModelEnum"
+      },
+      "OutputResponse": {
+        "properties": {
+          "byImage": {
+            "items": { "$ref": "#/components/schemas/ImageReport" },
+            "type": "array",
+            "title": "Byimage"
+          },
+          "total": { "$ref": "#/components/schemas/Report" }
+        },
+        "type": "object",
+        "required": ["byImage", "total"],
+        "title": "OutputResponse"
+      },
+      "Report": {
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "stages": {
+            "items": {
+              "anyOf": [
+                { "$ref": "#/components/schemas/StageByImage" },
+                { "$ref": "#/components/schemas/StageTotal" }
+              ]
+            },
+            "type": "array",
+            "title": "Stages"
+          }
+        },
+        "type": "object",
+        "required": ["id", "stages"],
+        "title": "Report"
+      },
+      "StageByImage": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "name": { "type": "string", "title": "Name" },
+          "factValue": {
+            "anyOf": [{ "type": "number" }, { "type": "string" }],
+            "title": "Factvalue"
+          },
+          "color": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Color" }
+        },
+        "type": "object",
+        "required": ["id", "name", "factValue", "color"],
+        "title": "StageByImage"
+      },
+      "StageTotal": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "name": { "type": "string", "title": "Name" },
+          "factValue": {
+            "anyOf": [{ "type": "number" }, { "type": "string" }],
+            "title": "Factvalue"
+          },
+          "planValue": { "type": "number", "title": "Planvalue", "default": 100 },
+          "plannedStart": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Plannedstart"
+          },
+          "plannedEnd": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Plannedend"
+          },
+          "progress_diff": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Progress Diff"
+          },
+          "color": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Color" }
+        },
+        "type": "object",
+        "required": ["id", "name", "factValue"],
+        "title": "StageTotal"
+      },
+      "TaskStatus": {
+        "properties": {
+          "status": { "type": "string", "title": "Status" },
+          "result": {
+            "anyOf": [{ "$ref": "#/components/schemas/OutputResponse" }, { "type": "null" }]
+          },
+          "error": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Error" }
+        },
+        "type": "object",
+        "required": ["status"],
+        "title": "TaskStatus"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

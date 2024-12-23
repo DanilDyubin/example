@@ -12,8 +12,8 @@ export const UploadImages = () => {
 
   const navigate = useNavigate();
 
-  const { urls, addImages } = useContext(ImageContext);
-  console.log(urls);
+  // const { urls, addImages } = useContext(ImageContext);
+  // console.log(urls);
 
   const filePicker = useRef(null);
   // API_KEY = 2c512d9968d02a61d78e9222a4213363
@@ -25,25 +25,45 @@ export const UploadImages = () => {
     setImages(Array.from(e.target.files));
   };
 
+  // const handleUpload = async () => {
+  //   if (!images.length) {
+  //     alert('please pick a file');
+  //     return;
+  //   }
+
+  //   let formData = new FormData();
+  //   images.forEach((image, i) => {
+  //     return formData.append(`image${i}`, image);
+  //   });
+  //   // formData.append('image', images);
+  //   console.log(formData);
+  //   let response = await fetch(
+  //     'https://api.imgbb.com/1/upload?key=2c512d9968d02a61d78e9222a4213363',
+  //     {
+  //       method: 'POST',
+  //       body: formData,
+  //     },
+  //   );
+
+  //   let result = await response.json();
+  //   console.log(result);
+  // };
+
   const handleUpload = async () => {
     if (!images.length) {
-      alert('please pick a file');
       return;
     }
 
     let formData = new FormData();
     images.forEach((image, i) => {
-      return formData.append(`image${i}`, image);
+      return formData.append('upl_img', image);
     });
     // formData.append('image', images);
     console.log(formData);
-    let response = await fetch(
-      'https://api.imgbb.com/1/upload?key=2c512d9968d02a61d78e9222a4213363',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    );
+    let response = await fetch('https://msi.stage-detection.contextmachine.cloud/upload_images', {
+      method: 'POST',
+      body: formData,
+    });
 
     let result = await response.json();
     console.log(result);
@@ -82,12 +102,51 @@ export const UploadImages = () => {
     }
     // setUrls(uploadedImages);
     console.log(uploadedImages);
-    addImages(uploadedImages);
+    // addImages(uploadedImages);
     navigate('/form', { state: { images: uploadedImages } });
   };
 
+  // '1e3b6309-1fc9-402d-ba67-23822cfcacf1'
+  // 'fb5dcafc-e446-4d21-84ca-d09e604ec98f'
+
+  const handleUploadImgMSI = async () => {
+    if (!images.length) {
+      return;
+    }
+
+    const uploadedImages = [];
+
+    for (let image of images) {
+      let formData = new FormData();
+      formData.append('image', image);
+
+      try {
+        const response = await fetch(
+          'https://msi.stage-detection.contextmachine.cloud/upload_images',
+          {
+            method: 'POST',
+            body: formData,
+          },
+        );
+        const result = await response.json();
+
+        // uploadedImages.push({
+        //   url: result.data.upload_img_ids,
+        //   deleteUrl: result.data.upload_img_ids,
+        // });
+
+        console.log(result);
+      } catch (error) {
+        console.error('Upload failed:', error);
+      }
+    }
+    console.log(uploadedImages);
+    // navigate('/form', { state: { images: uploadedImages } });
+  };
+
   useEffect(() => {
-    handleUploadImgBB();
+    // handleUploadImgBB();
+    handleUpload();
   }, [images]);
 
   const handleClick = () => {
@@ -145,21 +204,21 @@ export const UploadImages = () => {
         className={s['images-upload__input']}
         type="file"
         multiple
-        accept="image/*, .png, .jpg, .jpeg, .gif, .web"
+        accept="image/*, .png, .jpg, .jpeg, .gif, .web, .svg"
         name="images"
         onChange={handleImages}
         ref={filePicker}
       />
       <Button onClick={handleClick} title="Выберите файл" />
-      <button onClick={handleUploadImgBB}>POST</button>
+      {/* <button onClick={handleUploadImgBB}>POST</button> */}
       {/* <button
         onClick={() => deleteImage('https://ibb.co/VD2LXrr/d8679c9faab3aea3688ece7f14c9eb22')}>
         DELETE
       </button> */}
-      {urls.length > 0 ? urls.map((item, i) => <p key={i}>{item.url}</p>) : null}
-      <div>{urls.length}</div>
+      {/* {urls.length > 0 ? urls.map((item, i) => <p key={i}>{item.url}</p>) : null}
+      <div>{urls.length}</div> */}
       {/* <div>{url</div> */}
-      <Link to="/form">TO FORM</Link>
+      {/* <Link to="/form">TO FORM</Link> */}
     </div>
   );
 };

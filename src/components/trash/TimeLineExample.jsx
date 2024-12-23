@@ -19,7 +19,7 @@ import 'react-horizontal-scrolling-menu/dist/styles.css';
 import '../../styles/timeLine.css';
 // import './styles.scss';
 
-moment.locale('ru'); // устанавливаем русский язык
+moment.locale('ru');
 
 // const groups = [
 //   { id: 1, title: 'Зеленый', color: 'additional information', height: 60 },
@@ -27,6 +27,20 @@ moment.locale('ru'); // устанавливаем русский язык
 // ];
 
 const items = [
+  {
+    id: 0,
+    group: 0,
+    title: 'item 0',
+    start_time: moment('12.05.2024'),
+    end_time: moment('12.12.2024'),
+    itemProps: {
+      className: 'bordernone',
+      style: {
+        background: 'fuchsia',
+        border: 'none',
+      },
+    },
+  },
   {
     id: 1,
     group: 1,
@@ -82,6 +96,7 @@ const TimeLineExample = ({ data }) => {
   console.log(moment());
   console.log(moment().format('MMMM-DD-YYYY'));
   console.log(moment().get('day'));
+  console.log(moment('1732752000000'));
 
   return (
     <div>
@@ -110,9 +125,6 @@ const TimeLineExample = ({ data }) => {
         groupRenderer={groupRenderer}>
         <TimelineHeaders>
           <SidebarHeader>
-            {/* {({ getRootProps }) => {
-              return <div {...getRootProps()}>Этапы</div>;
-            }} */}
             {({ getRootProps }) => {
               return <CustomSidebarHeader getRootProps={getRootProps} />;
             }}

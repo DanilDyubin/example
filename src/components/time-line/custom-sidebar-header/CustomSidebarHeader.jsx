@@ -21,3 +21,20 @@ export const CustomSidebarHeader = ({ getRootProps }) => {
     </div>
   );
 };
+
+export const CustomSidebarHeaderWithoutColls = ({ getRootProps }) => {
+  return (
+    <div
+      {...getRootProps({
+        style: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+      })}
+      className={s['custom-sidebar-header']}>
+      <div className={s['custom-sidebar-header__title']}>Этапы</div>
+      <div className={s['custom-sidebar-header__subtitles-done']}>Выполнено</div>
+    </div>
+  );
+};

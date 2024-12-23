@@ -3,9 +3,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import MainPage from '../pages/main-page/MainPage';
 import FormPage from '../pages/form-page/FormPage';
-// import moment from 'moment';
-// import 'moment/locale/ru';
-// moment.locale('ru');
+import ReportPage from '../pages/report-page/ReportPage';
+import ReportPageTotal from '../pages/report-page/report-page-total/ReportPageTotal';
+import ReportPageSingle from '../pages/report-page/report-page-single/ReportPageSingle';
+import PdfPage from '../pages/pdf-page/PdfPage';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -21,7 +22,25 @@ const App = () => {
           path: '/form',
           element: <FormPage />,
         },
+        {
+          path: '/report',
+          element: <ReportPage />,
+          children: [
+            {
+              path: '/report',
+              element: <ReportPageTotal />,
+            },
+            {
+              path: '/report/single',
+              element: <ReportPageSingle />,
+            },
+          ],
+        },
       ],
+    },
+    {
+      path: '/pdf',
+      element: <PdfPage />,
     },
   ]);
 

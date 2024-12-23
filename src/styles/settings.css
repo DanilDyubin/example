@@ -11,9 +11,9 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'ALS Hauss', 'ALS Gorizont Expanded 2.1', sans-serif;
   font-weight: 400;
-  background-color: #f4f7fe;
+  background-color: #ffffff;
 }
 
 h1,
@@ -51,6 +51,7 @@ button {
 }
 
 .react-calendar-timeline .rct-dateHeader {
+  color: black !important;
   background-color: var(--color-white) !important; // поменять
 }
 
@@ -69,3 +70,13 @@ button {
 .react-calendar-timeline .rct-sidebar .rct-sidebar-row {
   padding: 0 !important;
 }
+
+.react-calendar-timeline .rct-item {
+  height: 40px !important;
+  line-height: 40px !important;
+  color: #131313 !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+}
+
+// .react-calendar-timeline .rct-scroll
