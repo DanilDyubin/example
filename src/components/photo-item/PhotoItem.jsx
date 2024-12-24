@@ -9,12 +9,13 @@ export const PhotoItem = ({ img, Icon }) => {
   );
 };
 
-export const PhotoItemHovered = ({ img, Icon }) => {
+export const PhotoItemHovered = ({ id, img, Icon, onDelete }) => {
+  const imageUrl = `https://msi.stage-detection.contextmachine.cloud/get_images?uid=${id}`;
   return (
     <div className={s['photo-item-hovered']}>
-      <img src={img} alt="photo" />
+      <img src={imageUrl} alt="photo" />
       <div className={s['photo-item-hovered__overlay']}></div>
-      <Icon className={s['photo-item-hovered__icon']} />
+      <Icon className={s['photo-item-hovered__icon']} onClick={onDelete} />
     </div>
   );
 };

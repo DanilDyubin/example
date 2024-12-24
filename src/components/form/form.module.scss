@@ -26,6 +26,8 @@
 
 .input,
 .textarea {
+  margin-top: 8px;
+  margin-bottom: 8px;
   font-family: 'ALS Hauss';
   font-weight: 400;
   font-size: 18px;
@@ -47,4 +49,12 @@
   height: auto;
   resize: none;
   overflow: hidden;
+}
+
+.error {
+  font-family: 'ALS Hauss';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: var(--color-warning);
 }

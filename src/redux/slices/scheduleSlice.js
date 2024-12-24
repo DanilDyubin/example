@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
+  imgsIds: [], //'1e3b6309-1fc9-402d-ba67-23822cfcacf1', 'fb5dcafc-e446-4d21-84ca-d09e604ec98f'
   currentDate: null,
   items: [],
   groups: [
@@ -113,13 +114,18 @@ const initialState = {
       color: '#B2FFE4',
     },
   ],
-  imgsIds: ['1e3b6309-1fc9-402d-ba67-23822cfcacf1', 'fb5dcafc-e446-4d21-84ca-d09e604ec98f'],
 };
 
 export const scheduleSlice = createSlice({
   name: 'schedule',
   initialState,
   reducers: {
+    addImgsIds(state, action) {
+      state.imgsIds = [...state.imgsIds, ...action.payload];
+    },
+    removeImgId(state, action) {
+      state.imgsIds = state.imgsIds.filter((id) => id !== action.payload);
+    },
     addItem(state, action) {
       const indexItem = state.items.findIndex((item) => item.id === action.payload.id);
       if (indexItem !== -1) {
@@ -155,5 +161,5 @@ export const scheduleSlice = createSlice({
   },
 });
 
-export const { addItem, addCurrentDate } = scheduleSlice.actions;
+export const { addItem, addCurrentDate, addImgsIds, removeImgId } = scheduleSlice.actions;
 export default scheduleSlice.reducer;

@@ -4,6 +4,10 @@ import img3 from '../../assets/images/photo/test.webp';
 import img4 from '../../assets/images/photo/test.webp';
 import img5 from '../../assets/images/photo/test.webp';
 import img6 from '../../assets/images/photo/test.webp';
+import img7 from '../../assets/images/photo/test.webp';
+import img8 from '../../assets/images/photo/test.webp';
+import img9 from '../../assets/images/photo/test.webp';
+import img10 from '../../assets/images/photo/test.webp';
 import s from './imageBlock.module.scss';
 
 const images = [img1, img2, img3, img4, img5];

@@ -6,7 +6,9 @@ const ReportPageTotal = () => {
   return (
     <div>
       <ImageBlock />
-      <Subtitle />
+      <div style={{ marginTop: '80px', marginBottom: '24px' }}>
+        <Subtitle />
+      </div>
       <TimeLineReport />
     </div>
   );

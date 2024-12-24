@@ -25,11 +25,11 @@ const FormPage = () => {
   return (
     <div>
       <PhotosUploaded />
-      <div style={{ marginTop: '100px' }}>
+      <div style={{ marginTop: '64px' }}>
         <Form />
       </div>
 
-      <div style={{ marginTop: '100px', marginBottom: '100px' }}>
+      <div style={{ marginTop: '80px' }}>
         {/* <TimeLine data={dataTimeLine} /> */}
         {/* <TimeLine1 data={dataTimeLine} /> */}
         {/* <TimeLineExample data={dataTimeLine} /> */}
@@ -39,7 +39,7 @@ const FormPage = () => {
       {/* <TimeLineExampleColored data={dataTimeLine} /> */}
 
       <div style={{ marginTop: '100px' }}></div>
-      <PageSkeleton />
+      {/* <PageSkeleton /> */}
       {/* <TimeLine2 />
       <ProgrmScroll /> */}
       {/* <GanttTask />
